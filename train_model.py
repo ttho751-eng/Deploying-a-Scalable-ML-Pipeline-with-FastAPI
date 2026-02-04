@@ -13,8 +13,8 @@ from ml.model import (
     train_model,
 )
 # TODO: load the cencus.csv data
-project_path = "Your path here"
-data_path = os.path.join(project_path, "data", "census.csv")
+project_path = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(project_path, "data", "census_clean.csv")
 print(data_path)
 data = None # your code here
 
