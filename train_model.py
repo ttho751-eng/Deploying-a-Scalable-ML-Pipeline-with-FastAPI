@@ -66,9 +66,8 @@ save_model(lb, lb_path)
 
 
 # load the model
-model = load_model(
-    model_path
-) 
+# model = load_model(
+  #  model_path) 
 
 # TODO: use the inference function to run the model inferences on the test dataset.
 preds = inference(model, X_test)
@@ -87,12 +86,13 @@ for col in cat_features:
         count = test[test[col] == slicevalue].shape[0]
         p, r, fb = performance_on_categorical_slice(
     test,
-    model,
+    col,
+    slicevalue,
+    cat_features,
+    "salary",
     encoder,
     lb,
-    categorical_features=cat_features,
-    slice_col=col,
-    slice_value=slicevalue,
+    model,
 )
 
         with open("slice_output.txt", "a") as f:
