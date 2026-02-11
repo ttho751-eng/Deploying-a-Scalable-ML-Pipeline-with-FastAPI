@@ -1,28 +1,37 @@
-import pytest
-# TODO: add necessary import
+import numpy as np
 
-# TODO: implement the first test. Change the function name and input as needed
+from ml.model import train_model, inference, compute_model_metrics
+
+
 def test_one():
-    """
-    # add description for the first test
-    """
-    # Your code here
-    pass
+    """Test that train_model returns a trained model object."""
+    X = np.array([[0, 1], [1, 0], [1, 1]])
+    y = np.array([0, 1, 1])
+
+    model = train_model(X, y)
+
+    assert model is not None
+    assert hasattr(model, "predict")
 
 
-# TODO: implement the second test. Change the function name and input as needed
 def test_two():
-    """
-    # add description for the second test
-    """
-    # Your code here
-    pass
+    """Test that compute_model_metrics returns three floats."""
+    y_true = np.array([1, 0, 1, 1])
+    y_pred = np.array([1, 0, 0, 1])
+
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+
+    assert isinstance(precision, float)
+    assert isinstance(recall, float)
+    assert isinstance(fbeta, float)
 
 
-# TODO: implement the third test. Change the function name and input as needed
 def test_three():
-    """
-    # add description for the third test
-    """
-    # Your code here
-    pass
+    """Test that inference returns predictions of correct length."""
+    X = np.array([[0, 1], [1, 0]])
+    y = np.array([0, 1])
+
+    model = train_model(X, y)
+    preds = inference(model, X)
+
+    assert len(preds) == len(X)
