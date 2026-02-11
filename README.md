@@ -1,29 +1,43 @@
-Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
+# Deploying a Scalable ML Pipeline with FastAPI
 
-# Environment Set up (pip or conda)
-* Option 1: use the supplied file `environment.yml` to create a new environment with conda
-* Option 2: use the supplied file `requirements.txt` to create a new environment with pip
-    
-## Repositories
-* Create a directory for the project and initialize git.
-    * As you work on the code, continually commit changes. Trained models you want to use in production must be committed to GitHub.
-* Connect your local git repo to GitHub.
-* Setup GitHub Actions on your repo. You can use one of the pre-made GitHub Actions if at a minimum it runs pytest and flake8 on push and requires both to pass without error.
-    * Make sure you set up the GitHub Action to have the same version of Python as you used in development.
+This project was completed as part of the Udacity Machine Learning DevOps Engineer Nanodegree.
 
-# Data
-* Download census.csv and commit it to dvc.
-* This data is messy, try to open it in pandas and see what you get.
-* To clean it, use your favorite text editor to remove all spaces.
+The goal of this project was to develop a classification model, write code to monitor performance on data slices, and deploy model with FastAPI package.
+The process included:
+- Data versioning with DVC
+- Model training and artifact persistence
+- Slice-based model performance evaluation
+- Unit testing with pytest
+- Code linting with flake8
+- Continuous Integration using GitHub Actions
+- Deployment of a REST API using FastAPI
 
-# Model
-* Using the starter code, write a machine learning model that trains on the clean data and saves the model. Complete any function that has been started.
-* Write unit tests for at least 3 functions in the model code.
-* Write a function that outputs the performance of the model on slices of the data.
-    * Suggestion: for simplicity, the function can just output the performance on slices of just the categorical features.
-* Write a model card using the provided template.
+## Project Repository
 
-# API Creation
-*  Create a RESTful API using FastAPI this must implement:
-    * GET on the root giving a welcome message.
-    * POST that does model inference.
+GitHub Repository:
+https://github.com/ttho751-eng/Deploying-a-Scalable-ML-Pipeline-with-FastAPI
+
+## Model Overview
+
+The model is a Logistic Regression classifier trained on the Census Income dataset to predict whether an individual's income exceeds $50K per year.
+
+Artifacts saved:
+- `model/model.pkl`
+- `model/encoder.pkl`
+- `model/lb.pkl`
+
+## API
+
+The FastAPI application provides:
+
+- GET `/` — Returns a welcome message.
+- POST `/data/` — Performs model inference on input data.
+
+## Testing and CI
+
+- Unit tests implemented in `test_ml.py`
+- Linting with flake8
+- GitHub Actions runs pytest and flake8 on push to main
+
+Screenshots of CI passing and API testing are included in the `screenshots/` directory.
+
